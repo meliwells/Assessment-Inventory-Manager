@@ -23,8 +23,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
     public void run(String[] args) {
         //test add product
-        //System.out.println("Add product");
-        //addProduct();
+        addProduct();
 
         //test update product
         updateProduct();
@@ -32,30 +31,32 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
     public void addProduct() {
         Scanner console = new Scanner(System.in);
-        System.out.println("Enter the product name: ");
+        System.out.println("Enter product Name: ");
         String name = console.nextLine();
 
-        System.out.println("Enter the product quantity: ");
-        String input = console.nextLine();
-        int quantity = 0;
-        try {
-            quantity = Integer.parseInt(input);
-            System.out.println("Valid quantity: " + quantity);
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a number: ");
-        }
-        console.nextLine();
+        int quantity;
+        do {
+            System.out.println("Enter Quantity: ");
+            while (!console.hasNextInt()) {
+                System.out.println("Please enter a valid quantity: ");
+                console.next();
+            }
+            quantity = console.nextInt();
+            console.nextLine();
+        } while (quantity <= 0);
+        System.out.println("Quantity :" + quantity);
 
-        System.out.println("Enter the price of the product: ");
-        String inputPrice =  console.nextLine();
-        double price = 0;
-        try {
-            price = Double.parseDouble(inputPrice);
-            System.out.println("Valid price: " + price);
-        } catch (NumberFormatException e) {
-            System.out.println("Please enter a valid price: ");
-        }
-        console.nextLine();
+        double price;
+        do {
+            System.out.println("Enter Price: ");
+            while (!console.hasNextDouble()) {
+                System.out.println("Please enter a valid price: ");
+                console.next();
+            }
+            price = console.nextDouble();
+            console.nextLine();
+        } while (price <= 0);
+        System.out.println("Price: " + price);
 
         System.out.println("Enter the expiration date: ");
         LocalDate expirationDate = LocalDate.parse(console.nextLine());
@@ -65,6 +66,10 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         newProduct.setQuantity(quantity);
         newProduct.setPrice(price);
         productRepository.save(newProduct);
+
+        System.out.println("Product added successfully!");
+        System.out.println("Press enter to return to the main menu...");
+        console.nextLine();
     }
 
     public void updateProduct() {

@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.StringJoiner;
 
 @Entity
 public class Product implements PerishableProduct, Serializable {
@@ -51,6 +52,16 @@ public class Product implements PerishableProduct, Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", Product.class.getSimpleName() + "[", "]")
+                .add("productId=" + productId)
+                .add("productName='" + productName + "'")
+                .add("quantity=" + quantity)
+                .add("price=" + price)
+                .toString();
     }
 
     @Override
