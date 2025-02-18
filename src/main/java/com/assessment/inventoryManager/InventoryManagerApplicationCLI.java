@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.Console;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -31,16 +32,38 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         String name = console.nextLine();
 
         System.out.println("Enter the product quantity: ");
-        int quantity = console.nextInt();
+        String input = console.nextLine();
+        int quantity = 0;
+        try {
+            quantity = Integer.parseInt(input);
+            System.out.println("Valid quantity: " + quantity);
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a number: ");
+        }
         console.nextLine();
 
         System.out.println("Enter the price of the product: ");
-        double price = Double.parseDouble(console.nextLine());
+        String inputPrice =  console.nextLine();
+        double price = 0;
+        try {
+            price = Double.parseDouble(inputPrice);
+            System.out.println("Valid price: " + price);
+        } catch (NumberFormatException e) {
+            System.out.println("Please enter a valid price: ");
+        }
+        console.nextLine();
+
+        System.out.println("Enter the expiration date: ");
+        LocalDate expirationDate = LocalDate.parse(console.nextLine());
 
         Product newProduct = new Product();
         newProduct.setProductName(name);
         newProduct.setQuantity(quantity);
         newProduct.setPrice(price);
         productRepository.save(newProduct);
+    }
+
+    public void updateProduct() {
+
     }
 }
