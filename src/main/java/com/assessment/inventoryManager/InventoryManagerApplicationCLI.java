@@ -80,7 +80,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         int productId = console.nextInt();
         console.nextLine();
 
-        System.out.println("Enter New Quantity (or press enter to skip): ");
+        System.out.println("Enter New Quantity (or press Enter to skip): ");
         String quantityInput = console.nextLine();
         Integer quantity = quantityInput.isEmpty() ? null : Integer.parseInt(quantityInput);
 
