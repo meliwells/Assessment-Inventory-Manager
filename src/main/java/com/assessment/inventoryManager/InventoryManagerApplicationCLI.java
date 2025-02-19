@@ -79,39 +79,26 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         System.out.println("Enter the product Id: ");
         int productId = console.nextInt();
         console.nextLine();
-        System.out.println("Current Details: " + productId);
 
-        String input1 = null;
         System.out.println("Enter New Quantity (or press enter to skip): ");
         String quantityInput = console.nextLine();
+        Integer quantity = quantityInput.isEmpty() ? null : Integer.parseInt(quantityInput);
 
-        if (!quantityInput.isEmpty()) {
-            input1 = quantityInput;
-        }
-
-        if (input1 == null) {
-            System.out.println("Input was skipped.");
-        } else {
-            System.out.println("You entered: " + input1);
-        }
-
-        String input2 = null;
         System.out.println("Enter New Price (or press Enter to skip):");
         String priceInput = console.nextLine();
-
-        if (!priceInput.isEmpty()) {
-            input2 = priceInput;
-        }
-
-        if (input2 == null) {
-            System.out.println("Input was skipped.");
-        } else {
-            System.out.println("You entered: " + input2);
-        }
+        Double price = priceInput.isEmpty() ? null : Double.parseDouble(priceInput);
 
             Optional<Product> updateProduct = productRepository.findById(productId);
             if (updateProduct.isPresent()) {
                 Product product = updateProduct.get();
+
+                if (quantity != null) {
+                    product.setQuantity(quantity);
+                }
+
+                if (price != null) {
+                    product.setPrice(price);
+                }
 
                 productRepository.save(product);
                 System.out.println("Product updated successfully!");
@@ -122,6 +109,5 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
             System.out.println("Press enter to return to the main menu...");
             console.nextLine();
-
     }
 }
