@@ -121,27 +121,31 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
     public void deleteProduct() {
         Scanner console = new Scanner(System.in);
-        System.out.println("==== Delete Product ====");
-        System.out.println("Enter Product ID:");
-        int productId = console.nextInt();
-        console.nextLine();
+        while (true) {
+            System.out.println("==== Delete Product ====");
+            System.out.println("Enter Product ID:");
+            int productId = console.nextInt();
+            console.nextLine();
 
             Optional<Product> deleteProduct = productRepository.findById(productId);
             if (deleteProduct.isPresent()) {
                 Product product = deleteProduct.get();
-                System.out.println("Are you sure you want to delete: " + product.getProductName() +"," + " Quantity: " + product.getQuantity() + " (Y/N)");
+                System.out.println("Are you sure you want to delete: " + product.getProductName() + "," + " Quantity: " + product.getQuantity() + " (Y/N)");
                 String confirm = console.nextLine();
                 if (confirm.equalsIgnoreCase("Y")) {
                     productRepository.delete(product);
                     System.out.println("Product deleted successfully!");
+                    break;
                 } else {
-                    System.out.println("Enter a different product Id");
+                    System.out.println("Product not deleted.");
                 }
             } else {
-                    System.out.println("Product not found!");
-                }
+                System.out.println("Product not found!");
+            }
+        }
 
-
+        System.out.println("Press Enter to return to the main menu...");
+        console.nextLine();
     }
 
 }
