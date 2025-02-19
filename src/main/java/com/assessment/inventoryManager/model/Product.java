@@ -6,9 +6,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
-public class Product implements Serializable {
+public class Product implements PerishableProduct, Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,5 +51,12 @@ public class Product implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+
+
+    @Override
+    public LocalDate expirationDate() {
+        return null;
     }
 }
