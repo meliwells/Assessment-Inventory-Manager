@@ -70,7 +70,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         productRepository.save(newProduct);
 
         System.out.println("Product added successfully!");
-        System.out.println("Press enter to return to the main menu...");
+        System.out.println("Press Enter to return to the main menu...");
         console.nextLine();
 
     }
@@ -86,7 +86,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
             Optional<Product> updateProduct = productRepository.findById(productId);
             if (updateProduct.isPresent()) {
                 Product product = updateProduct.get();
-                System.out.println("Current Details: " + product);
+                System.out.println("Current Details: " + "\n Name: " + product.getProductName() + "\n Quantity: " + product.getQuantity() + "\n Price: " + product.getPrice() );
 
                 System.out.println("Enter New Quantity (or press Enter to skip): ");
                 String quantityInput = console.nextLine();
@@ -111,7 +111,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
                 System.out.println("Product Id not found. Please enter a different Id.");
             }
 
-            System.out.println("Press enter to return to the main menu...");
+            System.out.println("Press Enter to return to the main menu...");
             console.nextLine();
     }
 
