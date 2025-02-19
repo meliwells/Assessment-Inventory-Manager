@@ -2,6 +2,7 @@ package com.assessment.inventoryManager;
 
 import com.assessment.inventoryManager.model.Product;
 import com.assessment.inventoryManager.repository.ProductRepository;
+import com.assessment.inventoryManager.ui.MenuOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +24,30 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         SpringApplication.run(InventoryManagerApplicationCLI.class, args);}
 
     public void run(String[] args) {
+        Console console = new Console();
+
+        MenuOption option;
+        do {
+            option = console.displayMenuOption();
+            switch (option) {
+                case ADD_PRODUCT:
+                    addProduct();
+                    break;
+                case VIEW_PRODUCTS:
+                    addProduct();
+                    break;
+                case SEARCH_PRODUCT:
+                    addProduct();
+                    break;
+                case UPDATE_PRODUCT:
+                    addProduct();
+                    break;
+                case DELETE_PRODUCT:
+                    addProduct();
+                    break;
+            }
+        } while (option != MenuOption.EXIT);
+
         //test add product
         //addProduct();
 
@@ -30,7 +55,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         //updateProduct();
 
         //test delete product
-        deleteProduct();
+        //deleteProduct();
 
     }
 
