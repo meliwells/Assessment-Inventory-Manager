@@ -79,34 +79,49 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         System.out.println("Enter the product Id: ");
         int productId = console.nextInt();
         console.nextLine();
+        System.out.println("Current Details: " + productId);
 
-        System.out.println("enter the new quantity (or press enter to skip): ");
-        int quantity = console.nextInt();
-        console.nextLine();
+        String input1 = null;
+        System.out.println("Enter New Quantity (or press enter to skip): ");
+        String quantityInput = console.nextLine();
 
-        System.out.println("Enter the new price (or press enter to skip): ");
-        double price = Double.parseDouble(console.nextLine());
+        if (!quantityInput.isEmpty()) {
+            input1 = quantityInput;
+        }
 
-        while (true) {
+        if (input1 == null) {
+            System.out.println("Input was skipped.");
+        } else {
+            System.out.println("You entered: " + input1);
+        }
+
+        String input2 = null;
+        System.out.println("Enter New Price (or press Enter to skip):");
+        String priceInput = console.nextLine();
+
+        if (!priceInput.isEmpty()) {
+            input2 = priceInput;
+        }
+
+        if (input2 == null) {
+            System.out.println("Input was skipped.");
+        } else {
+            System.out.println("You entered: " + input2);
+        }
+
             Optional<Product> updateProduct = productRepository.findById(productId);
             if (updateProduct.isPresent()) {
-                System.out.println("Product Id" + productId + " found");
                 Product product = updateProduct.get();
-                updateProduct.get().setQuantity(quantity);
-                updateProduct.get().setPrice(price);
 
                 productRepository.save(product);
-                break;
+                System.out.println("Product updated successfully!");
+
             } else {
                 System.out.println("Product Id not found. Please enter a different Id.");
             }
 
-            System.out.println("Product updated successfully!");
             System.out.println("Press enter to return to the main menu...");
             console.nextLine();
-        }
-
-
 
     }
 }
