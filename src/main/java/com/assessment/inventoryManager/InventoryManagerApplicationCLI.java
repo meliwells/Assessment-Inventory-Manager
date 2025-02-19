@@ -27,12 +27,16 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         //addProduct();
 
         //test update product
-        updateProduct();
+        //updateProduct();
+
+        //test delete product
+        deleteProduct();
 
     }
 
     public void addProduct() {
         Scanner console = new Scanner(System.in);
+        System.out.println("==== Add Product ====");
         System.out.println("Enter product Name: ");
         String name = console.nextLine();
 
@@ -77,8 +81,8 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
     public void updateProduct() {
         Scanner console = new Scanner(System.in);
-        System.out.println("Update a Product");
-        System.out.println("Enter the product Id: ");
+        System.out.println("==== Update Product ====");
+        System.out.println("Enter Product Id: ");
         int productId = console.nextInt();
         console.nextLine();
 
@@ -115,5 +119,33 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
             console.nextLine();
     }
 
+    public void deleteProduct() {
+        Scanner console = new Scanner(System.in);
+        while (true) {
+            System.out.println("==== Delete Product ====");
+            System.out.println("Enter Product ID:");
+            int productId = console.nextInt();
+            console.nextLine();
+
+            Optional<Product> deleteProduct = productRepository.findById(productId);
+            if (deleteProduct.isPresent()) {
+                Product product = deleteProduct.get();
+                System.out.println("Are you sure you want to delete: " + product.getProductName() + "," + " Quantity: " + product.getQuantity() + " (Y/N)");
+                String confirm = console.nextLine();
+                if (confirm.equalsIgnoreCase("Y")) {
+                    productRepository.delete(product);
+                    System.out.println("Product deleted successfully!");
+                    break;
+                } else {
+                    System.out.println("Product not deleted.");
+                }
+            } else {
+                System.out.println("Product not found!");
+            }
+        }
+
+        System.out.println("Press Enter to return to the main menu...");
+        console.nextLine();
+    }
 
 }
