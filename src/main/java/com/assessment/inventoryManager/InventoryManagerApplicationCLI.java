@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.Console;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -27,6 +28,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
         //test update product
         updateProduct();
+
     }
 
     public void addProduct() {
@@ -80,21 +82,23 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         int productId = console.nextInt();
         console.nextLine();
 
-        System.out.println("Enter New Quantity (or press Enter to skip): ");
-        String quantityInput = console.nextLine();
-        Integer quantity = quantityInput.isEmpty() ? null : Integer.parseInt(quantityInput);
-
-        System.out.println("Enter New Price (or press Enter to skip):");
-        String priceInput = console.nextLine();
-        Double price = priceInput.isEmpty() ? null : Double.parseDouble(priceInput);
 
             Optional<Product> updateProduct = productRepository.findById(productId);
             if (updateProduct.isPresent()) {
                 Product product = updateProduct.get();
+                System.out.println("Current Details: " + product);
+
+                System.out.println("Enter New Quantity (or press Enter to skip): ");
+                String quantityInput = console.nextLine();
+                Integer quantity = quantityInput.isEmpty() ? null : Integer.parseInt(quantityInput);
 
                 if (quantity != null) {
                     product.setQuantity(quantity);
                 }
+
+                System.out.println("Enter New Price (or press Enter to skip):");
+                String priceInput = console.nextLine();
+                Double price = priceInput.isEmpty() ? null : Double.parseDouble(priceInput);
 
                 if (price != null) {
                     product.setPrice(price);
@@ -110,4 +114,6 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
             System.out.println("Press enter to return to the main menu...");
             console.nextLine();
     }
+
+
 }
