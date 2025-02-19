@@ -2,7 +2,7 @@ CREATE DATABASE InventoryManager;
 
 USE InventoryManager;
 
-CREATE TABLE Product (
+CREATE TABLE product (
 	Product_ID int primary key auto_increment,
     Product_Name varchar(125) not null,
     Quantity int not null,
@@ -16,6 +16,7 @@ CREATE TABLE Product (
 	('Sugar', 8, 2.00, null),
     ('Eggs', 5, 4.50, '2025-03-15'),
     ('Butter', 10, 4.25, null);
+
 
 
 

@@ -23,7 +23,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
     public void run(String[] args) {
         //test add product
-        addProduct();
+        //addProduct();
 
         //test update product
         updateProduct();
@@ -58,8 +58,8 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         } while (price <= 0);
         System.out.println("Price: " + price);
 
-        System.out.println("Enter the expiration date: ");
-        LocalDate expirationDate = LocalDate.parse(console.nextLine());
+        //System.out.println("Enter the expiration date: ");
+        //LocalDate expirationDate = LocalDate.parse(console.nextLine());
 
         Product newProduct = new Product();
         newProduct.setProductName(name);
@@ -70,6 +70,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         System.out.println("Product added successfully!");
         System.out.println("Press enter to return to the main menu...");
         console.nextLine();
+
     }
 
     public void updateProduct() {
@@ -99,6 +100,10 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
             } else {
                 System.out.println("Product Id not found. Please enter a different Id.");
             }
+
+            System.out.println("Product updated successfully!");
+            System.out.println("Press enter to return to the main menu...");
+            console.nextLine();
         }
 
 
