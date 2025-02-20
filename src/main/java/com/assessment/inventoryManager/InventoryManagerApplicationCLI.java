@@ -24,35 +24,34 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         SpringApplication.run(InventoryManagerApplicationCLI.class, args);}
 
     public void run(String[] args) {
-        Console console = new Console();
 
-        MenuOption option;
-        do {
-            option = console.displayMenuOption();
-            switch (option) {
-                case ADD_PRODUCT:
-                    addProduct();
-                    break;
-                case VIEW_PRODUCTS:
-                    addProduct();
-                    break;
-                case SEARCH_PRODUCT:
-                    addProduct();
-                    break;
-                case UPDATE_PRODUCT:
-                    addProduct();
-                    break;
-                case DELETE_PRODUCT:
-                    addProduct();
-                    break;
-            }
-        } while (option != MenuOption.EXIT);
+//        MenuOption option;
+//        do {
+//            option = console.printMainMenu();
+//            switch (option) {
+//                case ADD_PRODUCT:
+//                    addProduct();
+//                    break;
+//                case VIEW_PRODUCTS:
+//                    addProduct();
+//                    break;
+//                case SEARCH_PRODUCT:
+//                    addProduct();
+//                    break;
+//                case UPDATE_PRODUCT:
+//                    addProduct();
+//                    break;
+//                case DELETE_PRODUCT:
+//                    addProduct();
+//                    break;
+//            }
+//        } while (option != MenuOption.EXIT);
 
         //test add product
         //addProduct();
 
         //test update product
-        //updateProduct();
+        updateProduct();
 
         //test delete product
         //deleteProduct();
@@ -99,7 +98,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         productRepository.save(newProduct);
 
         System.out.println("Product added successfully!");
-        System.out.println("Press Enter to return to the main menu...");
+        //System.out.println("Press Enter to return to the main menu...");
         console.nextLine();
 
     }
@@ -169,8 +168,9 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
             }
         }
 
-        System.out.println("Press Enter to return to the main menu...");
+        //System.out.println("Press Enter to return to the main menu...");
         console.nextLine();
     }
+
 
 }
