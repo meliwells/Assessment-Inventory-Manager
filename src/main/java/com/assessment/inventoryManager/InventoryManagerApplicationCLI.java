@@ -24,38 +24,36 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         SpringApplication.run(InventoryManagerApplicationCLI.class, args);}
 
     public void run(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        MenuOption choice;
 
-//        MenuOption option;
-//        do {
-//            option = console.printMainMenu();
-//            switch (option) {
-//                case ADD_PRODUCT:
-//                    addProduct();
-//                    break;
-//                case VIEW_PRODUCTS:
-//                    addProduct();
-//                    break;
-//                case SEARCH_PRODUCT:
-//                    addProduct();
-//                    break;
-//                case UPDATE_PRODUCT:
-//                    addProduct();
-//                    break;
-//                case DELETE_PRODUCT:
-//                    addProduct();
-//                    break;
-//            }
-//        } while (option != MenuOption.EXIT);
+        do {
+            displayMenu();
+            choice = getUserChoice(scanner);
 
-        //test add product
-        //addProduct();
-
-        //test update product
-        updateProduct();
-
-        //test delete product
-        //deleteProduct();
-
+            switch (choice) {
+                case ADD_PRODUCT:
+                    addProduct();
+                    break;
+                //case VIEW_PRODUCTS:
+                    //viewProducts();
+                    //break;
+                //case SEARCH_PRODUCT:
+                    //searchProduct();
+                    //break;
+                case UPDATE_PRODUCT:
+                    updateProduct();
+                    break;
+                case DELETE_PRODUCT:
+                    deleteProduct();
+                    break;
+                case EXIT:
+                    System.out.println("Exiting the Program");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice != MenuOption.EXIT);
     }
 
     public void addProduct() {
@@ -171,6 +169,42 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         //System.out.println("Press Enter to return to the main menu...");
         console.nextLine();
     }
+
+    public void displayMenu() {
+        System.out.println("==== Inventory Manager ====");
+        System.out.println("1. Add Product");
+        System.out.println("2. View Products");
+        System.out.println("3. Search Product");
+        System.out.println("4. Update Product");
+        System.out.println("5. Delete Product");
+        System.out.println("6. Exit");
+    }
+
+    public void searchProduct() {
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter Product ID or Name: ");
+    }
+
+    public MenuOption getUserChoice(Scanner scanner) {
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1:
+                return MenuOption.ADD_PRODUCT;
+            case 2:
+                return MenuOption.VIEW_PRODUCTS;
+            case 3:
+                return MenuOption.SEARCH_PRODUCT;
+            case 4:
+                return MenuOption.UPDATE_PRODUCT;
+            case 5:
+                return MenuOption.DELETE_PRODUCT;
+            case 6:
+                return MenuOption.EXIT;
+            default:
+                return null;
+        }
+    }
+
 
 
 }
