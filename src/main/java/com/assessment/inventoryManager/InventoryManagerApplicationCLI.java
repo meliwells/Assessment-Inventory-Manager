@@ -35,9 +35,9 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
                 case ADD_PRODUCT:
                     addProduct();
                     break;
-                //case VIEW_PRODUCTS:
-                    //viewProducts();
-                    //break;
+                case VIEW_PRODUCTS:
+                    viewProducts();
+                    break;
                 //case SEARCH_PRODUCT:
                     //searchProduct();
                     //break;
@@ -96,10 +96,52 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         productRepository.save(newProduct);
 
         System.out.println("Product added successfully!");
-        //System.out.println("Press Enter to return to the main menu...");
+        System.out.println("Press Enter to return to the main menu...");
         console.nextLine();
-
+        displayMenu();
     }
+
+    public void viewProducts() {
+        Scanner console = new Scanner(System.in);
+        System.out.println("==== Inventory List ====");
+        List<Product> product = productRepository.findAll();
+        for (Product p : product)
+        {
+            System.out.println(p);
+        }
+        System.out.println("Press Enter to return to the main menu...");
+        console.nextLine();
+        displayMenu();
+    }
+
+//    public void searchProduct() {
+//        Scanner console = new Scanner(System.in);
+//        System.out.println("Enter Product ID or Name: ");
+//
+//        String input = console.nextLine();
+//        Optional<Product> searchProduct = Optional.empty();
+//
+//        try {
+//            int productId = Integer.parseInt(input);
+//            searchProduct = productRepository.findById(productId);
+//        } catch (NumberFormatException e) {
+//            searchProduct = productRepository.findByName(input);
+//        }
+//
+//        if (searchProduct.isPresent()) {
+//            Product product = searchProduct.get();
+//            System.out.println("Product Found: \n"
+//                    + "ID: " + product.getProductId() + "\n"
+//                    + "Name: " + product.getProductName() + "\n"
+//                    + "Quantity: " + product.getQuantity() + "\n"
+//                    + "Price: " + product.getPrice());
+//        } else {
+//            System.out.println("Product not found.");
+//        }
+//        System.out.println("Press Enter to return to the main menu...");
+//        console.nextLine();
+//        displayMenu();
+//    }
 
     public void updateProduct() {
         Scanner console = new Scanner(System.in);
@@ -139,6 +181,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
 
             System.out.println("Press Enter to return to the main menu...");
             console.nextLine();
+            displayMenu();
     }
 
     public void deleteProduct() {
@@ -166,8 +209,9 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
             }
         }
 
-        //System.out.println("Press Enter to return to the main menu...");
+        System.out.println("Press Enter to return to the main menu...");
         console.nextLine();
+        displayMenu();
     }
 
     public void displayMenu() {
@@ -178,11 +222,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         System.out.println("4. Update Product");
         System.out.println("5. Delete Product");
         System.out.println("6. Exit");
-    }
-
-    public void searchProduct() {
-        Scanner console = new Scanner(System.in);
-        System.out.println("Enter Product ID or Name: ");
+        System.out.println("Enter your choice: ");
     }
 
     public MenuOption getUserChoice(Scanner scanner) {
