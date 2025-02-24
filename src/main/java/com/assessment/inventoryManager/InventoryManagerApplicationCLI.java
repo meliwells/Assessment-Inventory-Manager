@@ -26,6 +26,7 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
     public void run(String[] args) {
         Scanner scanner = new Scanner(System.in);
         MenuOption choice;
+        
 
         do {
             displayMenu();
@@ -49,11 +50,11 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
                     break;
                 case EXIT:
                     System.out.println("Exiting the Program");
-                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         } while (choice != MenuOption.EXIT);
+
     }
 
     public void addProduct() {
