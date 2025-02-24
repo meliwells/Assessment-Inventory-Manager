@@ -1,15 +1,14 @@
 package com.assessment.inventoryManager.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-public class Product implements PerishableProduct, Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="discriminator", discriminatorType = DiscriminatorType.STRING)
+public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,9 +52,6 @@ public class Product implements PerishableProduct, Serializable {
         this.price = price;
     }
 
-
-
-    @Override
     public LocalDate expirationDate() {
         return null;
     }

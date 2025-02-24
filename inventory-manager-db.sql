@@ -7,7 +7,7 @@ CREATE TABLE product (
     Product_Name varchar(125) not null,
     Quantity int not null,
     Price decimal(9 , 2 ) not null default 0,
-    Expiration_Date date null
+    Discriminator date null
     );
     
     INSERT INTO Product (Product_Name, Quantity, Price, Expiration_Date) 
