@@ -39,9 +39,9 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
                 case VIEW_PRODUCTS:
                     viewProducts();
                     break;
-                //case SEARCH_PRODUCT:
-                    //searchProduct();
-                    //break;
+                case SEARCH_PRODUCT:
+                    searchProduct();
+                    break;
                 case UPDATE_PRODUCT:
                     updateProduct();
                     break;
@@ -50,11 +50,11 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
                     break;
                 case EXIT:
                     System.out.println("Exiting the Program");
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
         } while (choice != MenuOption.EXIT);
-
     }
 
     public void addProduct() {
@@ -115,34 +115,34 @@ public class InventoryManagerApplicationCLI implements CommandLineRunner {
         displayMenu();
     }
 
-//    public void searchProduct() {
-//        Scanner console = new Scanner(System.in);
-//        System.out.println("Enter Product ID or Name: ");
-//
-//        String input = console.nextLine();
-//        Optional<Product> searchProduct = Optional.empty();
-//
-//        try {
-//            int productId = Integer.parseInt(input);
-//            searchProduct = productRepository.findById(productId);
-//        } catch (NumberFormatException e) {
-//            searchProduct = productRepository.findByName(input);
-//        }
-//
-//        if (searchProduct.isPresent()) {
-//            Product product = searchProduct.get();
-//            System.out.println("Product Found: \n"
-//                    + "ID: " + product.getProductId() + "\n"
-//                    + "Name: " + product.getProductName() + "\n"
-//                    + "Quantity: " + product.getQuantity() + "\n"
-//                    + "Price: " + product.getPrice());
-//        } else {
-//            System.out.println("Product not found.");
-//        }
-//        System.out.println("Press Enter to return to the main menu...");
-//        console.nextLine();
-//        displayMenu();
-//    }
+    public void searchProduct() {
+        Scanner console = new Scanner(System.in);
+        System.out.println("Enter Product ID or Name: ");
+
+        String input = console.nextLine();
+        Optional<Product> searchProduct = Optional.empty();
+
+        try {
+            int productId = Integer.parseInt(input);
+            searchProduct = productRepository.findById(productId);
+        } catch (NumberFormatException e) {
+            searchProduct = productRepository.findByProductName(input);
+        }
+
+        if (searchProduct.isPresent()) {
+            Product product = searchProduct.get();
+            System.out.println("Product Found: \n"
+                    + "ID: " + product.getProductId() + "\n"
+                    + "Name: " + product.getProductName() + "\n"
+                    + "Quantity: " + product.getQuantity() + "\n"
+                    + "Price: " + product.getPrice());
+        } else {
+            System.out.println("Product not found.");
+        }
+        System.out.println("Press Enter to return to the main menu...");
+        console.nextLine();
+        displayMenu();
+    }
 
     public void updateProduct() {
         Scanner console = new Scanner(System.in);
